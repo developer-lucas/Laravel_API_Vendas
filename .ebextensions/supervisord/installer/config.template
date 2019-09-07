@@ -1,0 +1,24 @@
+[unix_http_server]
+file=/tmp/supervisor.sock
+chmod=0777
+username=siscof
+password=Eugy79cc@
+[supervisord]
+logfile=/var/app/support/logs/supervisord.log
+logfile_maxbytes=0
+logfile_backups=0
+loglevel=warn
+pidfile=/var/run/supervisord/supervisord.pid
+nodaemon=false
+nocleanup=true
+user=webapp
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix:///tmp/supervisor.sock
+username=siscof
+password=Eugy79cc@
+[include]
+files = /etc/supervisor/conf.d/*.conf
