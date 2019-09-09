@@ -28,7 +28,7 @@ class Vendedores extends Eloquent {
             $object->object = 'vendedores';
 			
 			# Recupera os vendedores cadastrados
-			$vendedores = Vendedores::all();
+			$vendedores = Vendedores::orderBy('id', 'DESC')->get();
 			
 			# Adiciona os vendedores no objeto a ser retornado
 			$object->items = $vendedores;
@@ -62,7 +62,7 @@ class Vendedores extends Eloquent {
 			$vendedor           = new Vendedores();
 			$vendedor->nome     = $request->nome;
 			$vendedor->email    = $request->email;
-			$vendedor->comissao = 8.5;
+			$vendedor->comissao = isset($request->comissao) ? $request->comissao : 8.5;
 			$vendedor->save();
 			
 			# Retorna a requisição para a API

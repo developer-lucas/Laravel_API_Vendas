@@ -32,7 +32,9 @@ class Vendas extends Eloquent {
 			
 			# Busca os dados do vendedor e as respectivas vendas
 			$vendedor = Vendedores::where('id', '=', $request->vendedor_id)
-				->with('Vendas')
+				->with(['Vendas' => function ($q){
+					$q->orderBy('id', 'DESC');
+				}])
 				->first();
 			
 			if (!$vendedor){
