@@ -27,11 +27,14 @@ Route::group( [ 'prefix' => 'vendedores' ], function () {
 # Rota de vendas
 Route::group( [ 'prefix' => 'vendas' ], function () {
 	
+	# Listar todas as vendas de um vendedor
+	Route::get( '/', 'VendasController@getAll' );
+	
 	# Lançar nova Venda
 	Route::post( '/lancar', 'VendasController@lancar' ); /* Entrada: [id_vendedor, valor] | Saida:   [id, nome, email, comissao, valor, data] */
 	
 	# Listar todas as vendas de um vendedor
-	Route::get( '/', 'VendasController@vendasPorVendedor' ); /* Entrada: [id_vendedor] | Saida:   [id, nome, email, comissao, valor, data] */
+	Route::get( '/{vendedor_id}', 'VendasController@vendasPorVendedor' ); /* Entrada: [id_vendedor] | Saida:   [id, nome, email, comissao, valor, data] */
 	
 } );
 

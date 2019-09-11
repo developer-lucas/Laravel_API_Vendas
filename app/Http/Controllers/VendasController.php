@@ -16,7 +16,7 @@ class VendasController extends Controller {
 		# Regras a serem validadas
 		$rules = array(
 			'vendedor_id' => 'required|numeric',
-			'valor'       => 'required|numeric'
+			'valor'       => 'required'
 		);
 
 		# Mensagens de erro a serem enviadas
@@ -44,32 +44,22 @@ class VendasController extends Controller {
 
 	}
 	
-	# Listar todas as vendas de um vendedor
-	public function vendasPorVendedor( Request $request ) {
+	# Recupera todas as vendas cadastradas
+	public function getAll(){
 		
-		# Regras a serem validadas
-		$rules = array(
-			'vendedor_id' => 'required|numeric'
-		);
-
-		# Mensagens de erro a serem enviadas
-		$messages = array(
-			'vendedor_id.required' => 'É necessário informar o ID do vendedor cadastrado.'
-		);
-
-		# Valida os dados recebidos
-		$validator = Validator::make( $request->toArray(), $rules, $messages );
-
-		if ( $validator->fails() ) {
-			return response()->json( [
-				'object'    => 'erro',
-				'http_code' => '401',
-				'message'   => $validator->errors()
-			], 403 );
-		}
+		# Recupera as vendas de um vendedor
+		$data = Vendas::getAll();
+		
+		# Retorna a resposta
+		return $data;
+		
+	}
+	
+	# Listar todas as vendas de um vendedor
+	public function vendasPorVendedor($vendedor_id) {
 
 		# Recupera as vendas de um vendedor
-		$data = Vendas::vendasPorVendedor($request);
+		$data = Vendas::vendasPorVendedor($vendedor_id);
 		
 		# Retorna a resposta
 		return $data;
