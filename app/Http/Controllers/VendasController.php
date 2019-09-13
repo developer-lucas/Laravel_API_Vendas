@@ -44,6 +44,38 @@ class VendasController extends Controller {
 
 	}
 	
+	# Remove uma venda lançada anteriormente
+	public function remover(Request $request){
+		
+		# Regras a serem validadas
+		$rules = array(
+			'id' => 'required|numeric',
+		);
+
+		# Mensagens de erro a serem enviadas
+		$messages = array(
+			'id.required' => 'É necessário informar o ID da venda.'
+		);
+		
+		# Valida os dados recebidos
+		$validator = Validator::make( $request->toArray(), $rules, $messages );
+
+		if ( $validator->fails() ) {
+			return response()->json( [
+				'object'    => 'erro',
+				'http_code' => '401',
+				'message'   => $validator->errors()
+			], 403 );
+		}
+		
+		# Remove uma venda lançada anteriormente
+		$data = Vendas::remover($request);
+
+		# Retorna a resposta
+		return $data;
+		
+	}
+	
 	# Recupera todas as vendas cadastradas
 	public function getAll(){
 		

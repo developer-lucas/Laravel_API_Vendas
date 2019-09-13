@@ -135,5 +135,26 @@ class Vendas extends Eloquent {
         }
 
 	}
+	
+	# Remove uma venda lançada anteriormente
+	public static function remover($request){
+		
+		$venda = Vendas::find($request->id);
+		if (!$venda){
+			return response()->json( [
+				'objeto'   => 'erro',
+				'mensagem' => 'Não encontramos nenhuma venda com o ID informado.'
+			], 401 );
+		}
+		
+		# Remove uma venda
+		$venda->delete();
+		
+		# Retorna a requisição para a API
+		return response()->json( [
+			'id'       => $request->id,
+			'mensagem' => 'Venda excluída com sucesso.'
+		], 200 );
+	}
 
 }

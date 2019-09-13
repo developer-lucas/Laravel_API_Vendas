@@ -16,11 +16,15 @@ use Illuminate\Http\Request;
 # Rota de vendedores
 Route::group( [ 'prefix' => 'vendedores' ], function () {
 	
-	/* Criar Vendedor */
-	Route::post( '/cadastrar', 'VendedoresController@cadastrar' ); /* Entrada: [nome, email] | Saida:   [id, nome, email] */
-	
 	/* Listar todos os Vendedores */
-	Route::get( '/', 'VendedoresController@get' ); /* Saida: [id, nome, email] */
+	Route::get( '/', 'VendedoresController@get' );
+	
+	/* Criar Vendedor */
+	Route::post( '/cadastrar', 'VendedoresController@cadastrar' ); 
+	
+	/* Exclui um vendedor */
+	Route::post( '/remover', 'VendedoresController@remover' ); 	
+	
 	
 } );
 
@@ -30,11 +34,15 @@ Route::group( [ 'prefix' => 'vendas' ], function () {
 	# Listar todas as vendas de um vendedor
 	Route::get( '/', 'VendasController@getAll' );
 	
-	# Lançar nova Venda
-	Route::post( '/lancar', 'VendasController@lancar' ); /* Entrada: [id_vendedor, valor] | Saida:   [id, nome, email, comissao, valor, data] */
-	
 	# Listar todas as vendas de um vendedor
-	Route::get( '/{vendedor_id}', 'VendasController@vendasPorVendedor' ); /* Entrada: [id_vendedor] | Saida:   [id, nome, email, comissao, valor, data] */
+	Route::get( '/{vendedor_id}', 'VendasController@vendasPorVendedor' ); 
+	
+	# Lançar nova Venda
+	Route::post( '/remover', 'VendasController@remover' );
+	
+	# Lançar nova Venda
+	Route::post( '/lancar', 'VendasController@lancar' ); 	
+	
 	
 } );
 

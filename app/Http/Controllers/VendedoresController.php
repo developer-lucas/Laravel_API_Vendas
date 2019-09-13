@@ -55,6 +55,38 @@ class VendedoresController extends Controller {
 
 	}
 	
+	# Excluí um vendedor cadastrado
+	public function remover(Request $request){
+		
+		# Regras a serem validadas
+		$rules = array(
+			'id'  => 'required'
+		);
+
+		# Mensagens de erro a serem enviadas
+		$messages = array(
+			'id.required'  => 'É necessário informar o ID do vendedor.'
+		);
+		
+		# Valida os dados recebidos
+		$validator = Validator::make( $request->toArray(), $rules, $messages );
+
+		if ( $validator->fails() ) {
+			return response()->json( [
+				'object'    => 'erro',
+				'http_code' => '401',
+				'message'   => $validator->errors()
+			], 403 );
+		}
+
+		# Recupera as vendas de um vendedor
+		$data = Vendedores::remover($request);
+		
+		# Retorna a resposta
+		return $data;
+		
+	}
+	
 
 }
 

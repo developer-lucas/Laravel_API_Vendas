@@ -79,5 +79,26 @@ class Vendedores extends Eloquent {
         }
 
 	}
+	
+	# Remove um vendedor cadastrado anteriormente
+	public static function remover($request){
+		
+		$vendedor = Vendedores::find($request->id);
+		if (!$vendedor){
+			return response()->json( [
+				'objeto'   => 'erro',
+				'mensagem' => 'Não encontramos nenhum vendedor com o ID informado.'
+			], 401 );
+		}
+		
+		# Remove o vendedor
+		$vendedor->delete();
+		
+		# Retorna a requisição para a API
+		return response()->json( [
+			'id'       => $request->id,
+			'mensagem' => 'Vendedor excluído com sucesso. Todas as vendas foram excluídas.'
+		], 200 );
+	}
 
 }
