@@ -106,14 +106,25 @@ Rotas dos serviços disponíveis:
 [POST] /api/vendedores/cadastrar  
 - Criar Vendedor  
 - Parâmetros de entrada: nome, email  
-  
+
+[POST] /api/vendedores/remover 
+- Excluir Vendedor  
+- Parâmetros de entrada: id
+
 [GET] /api/vendas  
-- Listar todas as vendas de um vendedor  
-- Parâmetros de entrada: vendedor_id  
+- Listar todas as vendas  
+  
+[GET] /api/vendas/{vendedor_id}  
+- Listar todas as vendas de um vendedor 
 
 [POST] /api/vendas/lancar  
 - Lançar nova Venda  
 - Parâmetros de entrada: vendedor_id, valor
+
+[POST] /api/vendas/remover 
+- Excluir uma venda  
+- Parâmetros de entrada: id
+
 ```
 
 ## Autores
